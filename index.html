@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <div class="text-center mb-8">
+            <i class="fas fa-lock text-4xl text-blue-500 mb-4"></i>
+            <h1 class="text-2xl font-semibold text-gray-800">Login</h1>
+        </div>
+        <form id="loginForm" onsubmit="return handleLogin(event)" class="space-y-6">
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <div class="relative">
+                    <input type="password" id="password" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter password">
+                    <span id="togglePassword" class="absolute right-3 top-2.5 cursor-pointer text-gray-500">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                Login
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Password for demo purposes (in real applications, this should be handled securely)
+        const CORRECT_PASSWORD = "admin123";
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            
+            if (password === CORRECT_PASSWORD) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'table.html';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>
